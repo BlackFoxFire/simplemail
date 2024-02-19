@@ -14,5 +14,7 @@
             "email": "blackfox@proximus.be"
         }
     ],
-    "require": {}
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
 }
