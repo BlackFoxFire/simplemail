@@ -5,7 +5,7 @@
     "license": "LGPL-2.1-only",
     "autoload": {
         "psr-4": {
-            "Simplemail\\Simplemail\\": "src/"
+            "Simplemail\\": "src/Simplemail"
         }
     },
     "authors": [
