@@ -18,31 +18,35 @@ use PHPMailer\PHPMailer\Exception;
 class Simplemail
 {
 	/*
-		Les constantes
-		--------------
-	*/
-
-	// A modifier suivant votre configuration
-	const SMTP_HOST = "votre_serveur_smtp";
-	const SMTP_USER = "nom_utilisateur_serveur_smtp";	
-	const SMTP_PASSWORD = "mot_de_passe_du_serveur_smtp";
-
-	/*
 		Les attributs
 		-------------
 	*/
 
+	// Serveur SMTP distant
+	private string $smtpHost;
+	// Nom d'utilisateur du serveur SMTP
+	private string $smtpUser;
+	// Mot de passe de l'utilisateur
+	private string $smtpPassword;
 	// L'instance de PHPMailer
-	protected PHPMailer $mail;
+	private PHPMailer $mail;
 
 	/*
 		Constructeur
 		------------
 	*/
-	
-	public function __construct(bool $debug = false)
+	public function __construct(string $smtpHost, string $smtpUser, string $smtpPassword, bool $debug = false)
 	{
-		$this->mail = new PHPMailer($debug);		// Passer true pour afficher les erreurs d'envoi
+		if(!empty($smtpHost) && !empty($smtpUser) && !empty($smtpPassword)) {
+			$this->smtpHost = $smtpHost;
+			$this->smtpUser = $smtpUser;
+			$this->smtpPassword = $smtpPassword;
+		}
+		else {
+			throw new \InvalidArgumentException("Les arguments ne peuvent pas être des chaines de caractères vide !");
+		}
+
+		$this->mail = new PHPMailer($debug); // Passer true pour afficher les erreurs d'envoi
 	}
 
 	/*
@@ -93,10 +97,10 @@ class Simplemail
 			// Server settings
 			// $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;					// Enable verbose debug output
 			$this->mail->IsSMTP();											// Set mailer to use SMTP
-			$this->mail->Host = self::SMTP_HOST;							// Adresse IP ou DNS du serveur SMTP
+			$this->mail->Host = $this->smtpHost;							// Adresse IP ou DNS du serveur SMTP
 			$this->mail->SMTPAuth = true;									// Utiliser l'identification
-			$this->mail->Username = self::SMTP_USER;						// Adresse email à utiliser
-			$this->mail->Password = self::SMTP_PASSWORD;					// Mot de passe de l'adresse email à utiliser
+			$this->mail->Username = $this->smtpUser;						// Adresse email à utiliser
+			$this->mail->Password = $this->smtpPassword;					// Mot de passe de l'adresse email à utiliser
 			// $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;		// Enable implicit TLS encryption
 			$this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;		// Enable implicit TLS encryption
 			// $this->mail->SMTPSecure = 'tls';								// Enable implicit TLS encryption
