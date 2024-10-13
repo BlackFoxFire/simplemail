@@ -9,7 +9,7 @@
 *
 */
 
-namespace Simplemail;
+namespace Blackfox\Simplemail;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
