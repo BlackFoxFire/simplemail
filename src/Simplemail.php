@@ -91,7 +91,7 @@ class Simplemail
 	}
 
 	// Envoi l'email
-	public function send(string $subject = '', string $content = '', string $altBody = ''): void
+	public function send(string $subject = '', string $content = '', string $altBody = ''): bool
 	{
 		try {
 			// Server settings
@@ -114,7 +114,7 @@ class Simplemail
 			$this->mail->AltBody = $altBody;								// Le message en text plein
 
 			// Envoi ...
-			$this->mail->send();
+			return $this->mail->send();
 
 		} catch (Exception $e) {
 			throw new \RuntimeException("Message could not be sent. Mailer Error: {" . $this->mail->ErrorInfo . "}");
