@@ -2,6 +2,10 @@
     "name": "blackfox/simplemail",
     "description": "Simplifie l'utilisation et l'envoie d'un message avec PHPMailer",
     "type": "library",
+    "keywords": ["mail", "mailer", "phpmailer"],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
     "license": "LGPL-2.1-only",
     "autoload": {
         "psr-4": {
@@ -14,7 +18,5 @@
             "email": "blackfox@proximus.be"
         }
     ],
-    "require": {
-        "phpmailer/phpmailer": "^6.9"
-    }
+    "minimum-stability": "stable"
 }
